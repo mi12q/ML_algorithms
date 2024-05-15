@@ -1,8 +1,9 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.datasets import make_classification
-from sklearn.metrics import classification_report
+from sklearn.metrics import accuracy_score
 import graphviz
+
 
 
 class Node:
@@ -206,27 +207,25 @@ class DecisionTree:
 
 
 def main():
-
     X, y = make_classification(n_samples=1400, n_features=2, n_redundant=0, n_informative=2,
                                random_state=1, n_clusters_per_class=1)
     my_three = DecisionTree(max_depth=3)
     my_three.fit(X, y)
-
     y_prediction = my_three.predict(X)
-    print(classification_report(y, y_prediction))
-
+    accuracy = accuracy_score(y, y_prediction)
+    print(f'Accuracy: {accuracy * 100}%')
     my_three.visualize_tree()
 
-    #Границы построены между классами
+    # Границы построены между классами
     x_min, x_max = X[:, 0].min() - 1, X[:, 0].max() + 1
     y_min, y_max = X[:, 1].min() - 1, X[:, 1].max() + 1
     x_points, y_points = np.meshgrid(np.arange(x_min, x_max, 0.02),
-                         np.arange(y_min, y_max, 0.02))
-    data = my_three.predict(np.c_[x_points.ravel(), y_points.ravel()])
-    data = data.reshape(x_points.shape)
+                                     np.arange(y_min, y_max, 0.02))
+    predicted_data = my_three.predict(np.c_[x_points.ravel(), y_points.ravel()])
+    predicted_data = predicted_data.reshape(x_points.shape)
 
     plt.figure(figsize=(10, 6))
-    plt.pcolormesh(x_points, y_points, data, cmap='bwr', alpha=0.2)
+    plt.pcolormesh(x_points, y_points, predicted_data, cmap='bwr', alpha=0.2)
     plt.scatter(X[:, 0], X[:, 1], c=y, cmap='bwr')
     plt.xlim(x_points.min(), x_points.max())
     plt.ylim(y_points.min(), y_points.max())
