@@ -6,16 +6,16 @@ import graphviz
 
 
 class Node:
-    def __init__(self, feature_idx=None, threshold=None, left=None, right=None, value=None):
+    def __init__(self, feature_index=None, threshold=None, left=None, right=None, value=None):
         """
 
-        :param feature_idx: - индекс признака, по которому разбивается вершина
+        :param feature_index: - индекс признака, по которому разбивается вершина
         :param threshold: - пороговое значение, по которому разбивается вершина
         :param left: - левое поддерево
         :param right: - правое поддерево
         :param value: - значение в листовой вершине
         """
-        self.feature_index = feature_idx
+        self.feature_index = feature_index
         self.threshold = threshold
         self.left = left
         self.right = right
@@ -207,7 +207,7 @@ class DecisionTree:
 
 def main():
 
-    X, y = make_classification(n_samples=1000, n_features=2, n_redundant=0, n_informative=2,
+    X, y = make_classification(n_samples=1400, n_features=2, n_redundant=0, n_informative=2,
                                random_state=1, n_clusters_per_class=1)
     my_three = DecisionTree(max_depth=3)
     my_three.fit(X, y)
