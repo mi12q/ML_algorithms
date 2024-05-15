@@ -230,7 +230,7 @@ def main():
     plt.xlim(x_points.min(), x_points.max())
     plt.ylim(y_points.min(), y_points.max())
     plt.title("Классификация дерева решений")
-    plt.savefig('decision_three.png')
+    plt.savefig('decision_tree.png')
     plt.show()
 
 
