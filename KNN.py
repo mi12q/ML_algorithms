@@ -2,7 +2,7 @@ import numpy as np
 from matplotlib import pyplot as plt
 from sklearn.datasets import make_classification
 from matplotlib.colors import ListedColormap
-from sklearn.metrics import accuracy_score
+from sklearn.metrics import accuracy_score, recall_score, f1_score, precision_score
 
 
 def euclidean_distance(x1, x2):
@@ -66,8 +66,13 @@ def main():
     model.fit(X, y)
     y_prediction = model.predict(X)
     accuracy = accuracy_score(y, y_prediction)
+    precision = precision_score(y,y_prediction)
+    recall = recall_score(y, y_prediction)
+    f1 = f1_score(y, y_prediction)
     print(f'Accuracy: {accuracy * 100}%')
-
+    print(f'Precision: {precision* 100}%')
+    print(f'Recall: {recall * 100}%')
+    print(f'f1 score: {f1 * 100}%')
     h = .02
     cmap_light = ListedColormap(['orange', 'cyan', 'cornflowerblue'])
     cmap_bold = ListedColormap(['darkorange', 'c', 'darkblue'])
